@@ -1,0 +1,90 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    客户信息
+    <small>客户信息的维护</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li>
+      <a href="#">
+        <i class="fa fa-dashboard"></i> Level</a>
+    </li>
+    <li class="active">Here</li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content container-fluid">
+  <div class="box box-info">
+    <div class="box-header with-border">
+      <h3 class="box-title">{{operation}}客户信息</h3>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form class="form-horizontal">
+      <div class="box-body">
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">客户编号</label>
+
+          <div class="col-sm-6">
+            <input type="email" [disabled]="operation === '修改'" class="form-control" name="customerNo" [(ngModel)]="customer.no" placeholder="请输入客户编号">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">客户姓名</label>
+
+          <div class="col-sm-6">
+            <input type="email" class="form-control" name="customerName" [(ngModel)]="customer.name" placeholder="请输入客户姓名">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">客户评级</label>
+
+          <div class="col-sm-10" style="margin-top:8px;">
+            <app-stars [rating]="customer.rating" [readonly]="false" (ratingChange)="getChangedRatingValue($event)"></app-stars>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">客户类型</label>
+
+          <div class="typesStyle col-sm-10">
+            <div *ngFor="let type of types" class="radio">
+              <label>
+                <input type="radio" name="optionsRadios" value="{{type}}" [(ngModel)]="customer.type" checked="">{{type}}
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">所属行业</label>
+
+          <div class="categoriesStyle col-sm-10">
+            <div *ngFor="let category of categories" class="checkbox">
+              <label>
+                <input name="categoriesName" [checked]="customer.categories.includes(category)" value="{{category}}" type="checkbox">{{category}}
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">客户描述</label>
+
+          <div class="col-sm-10">
+            <textarea class="form-control" name="description" [(ngModel)]="customer.description" id="" rows="10"></textarea>
+          </div>
+        </div>
+      </div>
+      <!-- /.box-body -->
+      <div class="box-footer">
+        <button type="submit" (click)="cancel()" class="btn btn-default">取消</button>
+        <button type="submit" (click)="save()" class="btn btn-info pull-right">保存</button>
+      </div>
+      <!-- /.box-footer -->
+    </form>
+  </div>
+</section>
+<!-- /.content -->
